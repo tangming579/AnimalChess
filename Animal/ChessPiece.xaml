@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Animal.ChessPiece"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:custom="clr-namespace:Animal"
+             mc:Ignorable="d" 
+             Height="158" Width="277">
+    <Grid x:Name="LayoutRoot" VerticalAlignment="Stretch"  HorizontalAlignment="Left"
+           >
+        <custom:Rotate3DContainer x:Name="my3D">
+            <custom:Panel1></custom:Panel1>
+            <custom:Panel2></custom:Panel2>
+        </custom:Rotate3DContainer>
+    </Grid>
+</UserControl>

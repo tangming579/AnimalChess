@@ -1,0 +1,99 @@
+﻿<Window x:Class="Animal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:Animal"
+        Title="兽棋" Height="573" Width="1000" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Storyboard x:Key="leafLeave" RepeatBehavior="Forever">
+            <!--小树叶动画-->
+            <DoubleAnimation BeginTime="00:00:00" AutoReverse="True" Duration="00:00:02" From="0" To="10" Storyboard.TargetProperty="Angle" Storyboard.TargetName="igSmallLeaf">
+            </DoubleAnimation>
+            <!--大树叶动画-->
+            <DoubleAnimation BeginTime="00:00:00" AutoReverse="True" Duration="00:00:02" From="15" To="-15" Storyboard.TargetProperty="Angle" Storyboard.TargetName="igBigLeaf">
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="cloudMove" RepeatBehavior="Forever">
+            <!--白云移动-->
+            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:20" From="0" To="200" Storyboard.TargetProperty="X" Storyboard.TargetName="igCloud" AutoReverse="False">
+            </DoubleAnimation>
+            <!--白云透明度-->
+            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:14" From="0.8" To="0.1" AutoReverse="False" Storyboard.TargetName="imgCloud" Storyboard.TargetProperty="Opacity">
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="58*"></RowDefinition>
+            <RowDefinition Height="157*"></RowDefinition>
+            <RowDefinition Height="319*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="ChessBoard" Grid.Row="1" ShowGridLines="True" Loaded="ChessBoard_Loaded"
+              MouseLeftButtonUp="ChessBoard_MouseLeftButtonUp" Background="Green" Grid.RowSpan="2">
+            <Grid.RowDefinitions >
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Canvas x:Name="myCanvas" Grid.Row="0"></Canvas>
+            <Menu Height="23" Margin="12,12,0,0" Name="menu1" VerticalAlignment="Top">
+            <MenuItem Header="新游戏" Name="menuNew" Margin="0,0,40,0" Click="menuNew_Click"></MenuItem>
+            <MenuItem Header="统计" Name="menuControl" Margin="0,0,40,0" ></MenuItem>
+            <MenuItem Header="退出" Name="menuExist" Margin="0,0,40,0" Click="menuExist_Click"></MenuItem>
+            <CheckBox Content="音效" IsChecked="True" Name="chkSound" Margin="0,0,40,0"></CheckBox>
+            <MenuItem Header="跳过" Name="menuChange" Margin="0,0,40,0" Click="menuChange_Click"></MenuItem>
+            <MenuItem Header="帮助" Name="menuHelp" Margin="0,0,40,0"></MenuItem>
+
+        </Menu>
+
+        <Image Source="Images/Sun2.png" Grid.Row="2" Width="105" Height="53" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,-10,0,0" Grid.Column="1">
+        </Image>
+        <Image Source="Images/yezi2.png" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
+        <Image Source="Images/yezi3.png" Grid.Column="1" Grid.Row="2" Width="68" Height="65" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="117,20,0,0">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform x:Name="igSmallLeaf"></RotateTransform>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="Images/yezi3.png" Width="40" Height="42" Margin="57,40,0,0" Grid.Row="2" HorizontalAlignment="Left" Grid.Column="1"  VerticalAlignment="Top">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform x:Name="igBigLeaf"></RotateTransform>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="Images/cloud.png" Width="190" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0"  Grid.Column="1" x:Name="imgCloud">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform x:Name="igCloud"></TranslateTransform>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <TextBlock Text="玩家0" Grid.Column="1" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="22,33,0,0" Name="txbPlayer1" VerticalAlignment="Top" />
+        <TextBlock Text="玩家1" Grid.Column="1" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="22,102,0,0" Name="txbPlayer2" VerticalAlignment="Top" />
+        
+        <Label Content="信息：" Grid.Column="1" Grid.Row="2" Height="28" HorizontalAlignment="Left" Margin="13,50,0,0" Name="label1" VerticalAlignment="Top" />
+        <ScrollViewer Grid.Column="1"  Grid.Row="2" Height="224" HorizontalAlignment="Left" Margin="23,83,0,0" Name="sclMessage" VerticalAlignment="Top" Width="200">
+            <TextBox Grid.Column="1" IsReadOnly="True" Grid.Row="2" Height="224" HorizontalAlignment="Left" Name="txbMessage"  Width="200"  TextWrapping="Wrap"/>
+        </ScrollViewer>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF89CAE2" Offset="0"/>
+                <GradientStop Color="#FFD9EAF0" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+    </Grid>
+</Window>

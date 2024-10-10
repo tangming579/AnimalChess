@@ -1,0 +1,8 @@
+﻿<Window x:Class="Animal.NewGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NewGame" Height="239" Width="296">
+    <Grid Height="159" Width="247">
+        
+    </Grid>
+</Window>
